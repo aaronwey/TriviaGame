@@ -1,13 +1,11 @@
 
 
-/* ==========================================================================
-   Author's custom styles
-   ========================================================================== */
 
 .jumbotron {
   box-sizing: border-box;
   height: 600px;
-  background-color: rgba(0, 0, 0, 0);
+  background-color: blue;
+  font-family: cursive;
 }
 
 .main-button-container {
@@ -22,7 +20,7 @@
 }
 
 .answer:hover {
-  background: pink;
+  background: teal;
 }
 
 .answer {
@@ -51,6 +49,6 @@
 }
 
 body {
-  background-color: #DD0506;
+  background-color: blue;
   color: white;
 }
