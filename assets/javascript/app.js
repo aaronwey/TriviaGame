@@ -19,7 +19,7 @@ $("body").on("click", ".start-button", function(event){
 $("body").on("click", ".answer", function(event){
 	
 	selectedAnswer = $(this).text();
-	if(selectedAnswer === correctAnswers[questionCounter]) {		
+	if(selectedAnswer === correctAnswers[questionNumber]) {		
 		clearInterval(theClock);
 		generateWin();
 	}
@@ -38,38 +38,38 @@ $("body").on("click", ".reset-button", function(event){
 function generateLossDueToTimeOut() {
 	unansweredTally++;
 	gameHTML = "<p class='text-center timer-p'>Time Remaining: <span class='timer'>" + counter + "</span></p>" +
-	 "<p class='text-center'>You ran out of time!  The correct answer was: " + correctAnswers[questionCounter] + 
+	 "<p class='text-center'>You ran out of time!  The correct answer was: " + correctAnswers[questionNumber] + 
 	 "</p>" + "<img class='center-block img-wrong' src='assets/images/chicken.jpg'>";
 	$(".mainArea").html(gameHTML);
 	setTimeout(wait, 4000);  
 }
 
 function generateWin() {
-	correctTally++;
+	correctScore++;
 	gameHTML = "<p class='text-center timer-p'>Time Remaining: <span class='timer'>" + counter + "</span></p>" +
-	 "<p class='text-center'>Correct! The answer is: " + correctAnswers[questionCounter] + "</p>" + imageArray[questionCounter];
+	 "<p class='text-center'>Correct! The answer is: " + correctAnswers[questionNumber] + "</p>" + imageArray[questionNumber];
 	$(".mainArea").html(gameHTML);
 	setTimeout(wait, 4000);  
 }
 
 function generateLoss() {
-	incorrectTally++;
+	incorrectScore++;
 	gameHTML = "<p class='text-center timer-p'>Time Remaining: <span class='timer'>" + counter + "</span></p>" +
-	 "<p class='text-center'>Wrong! The correct answer is: "+ correctAnswers[questionCounter] + "</p>" + "<img class='center-block img-wrong' src='assets/images/chicken.jpg'>";
+	 "<p class='text-center'>Wrong! The correct answer is: "+ correctAnswers[questionNumber] + "</p>" + "<img class='center-block img-wrong' src='assets/images/chicken.jpg'>";
 	$(".mainArea").html(gameHTML);
 	setTimeout(wait, 4000); 
 }
 
 function generateHTML() {
 	gameHTML = "<p class='text-center timer-p'>Time Remaining: <span class='timer'>30</span></p><p class='text-center'>" +
-	 questionArray[questionCounter] + "</p><p class='first-answer answer'>A. " + answerArray[questionCounter][0] + "</p><p class='answer'>B. "+
-	 answerArray[questionCounter][1] + "</p><p class='answer'>C. " + answerArray[questionCounter][2] + "</p><p class='answer'>D. " + answerArray[questionCounter][3] + "</p>";
+	 questionArray[questionNumber] + "</p><p class='first-answer answer'>A. " + answerArray[questionNumber][0] + "</p><p class='answer'>B. "+
+	 answerArray[questionNumber][1] + "</p><p class='answer'>C. " + answerArray[questionNumber][2] + "</p><p class='answer'>D. " + answerArray[questionNumber][3] + "</p>";
 	$(".mainArea").html(gameHTML);
 }
 
 function wait() {
-	if (questionCounter < 5) {
-	questionCounter++;
+	if (questionNumber < 5) {
+	questionNumber++;
 	generateHTML();
 	counter = 30;
 	timerWrapper();
@@ -95,15 +95,15 @@ function timerWrapper() {
 
 function finalScreen() {
 	gameHTML = "<p class='text-center timer-p'>Time Remaining: <span class='timer'>" + counter + "</span></p>" + "<p class='text-center'>All done, here's how you did!" + 
-	"</p>" + "<p class='summary-correct'>Correct Answers: " + correctTally + "</p>" + "<p>Wrong Answers: " + incorrectTally + "</p>" + "<p>Unanswered: " + unansweredTally + 
+	"</p>" + "<p class='summary-correct'>Correct Answers: " + correctScore + "</p>" + "<p>Wrong Answers: " + incorrectScore + "</p>" + "<p>Unanswered: " + unansweredTally + 
 	"</p>" + "<p class='text-center reset-button-container'><a class='btn btn-primary btn-lg btn-block reset-button' href='#' role='button'>Reset The Quiz!</a></p>";
 	$(".mainArea").html(gameHTML);
 }
 
 function resetGame() {
-	questionCounter = 0;
-	correctTally = 0;
-	incorrectTally = 0;
+	questionNumber = 0;
+	correctScore = 0;
+	incorrectScore = 0;
 	unansweredTally = 0;
 	counter = 30;
 	generateHTML();
@@ -126,9 +126,9 @@ var imageArray = ["<img class='center-block img-right' src='assets/images/alumin
 					"<img class='center-block img-right' src='assets/images/sargasso.gif'>", "<img class='center-block img-right' src='assets/images/russia.jpg'>",];
 
 var correctAnswers = ["A. Aluminum", "B. Oxygen", "C. Pacific", "C. January", "D. Sargasso", "A. Russia"];
-var questionCounter = 0;
+var questionNumber = 0;
 var selecterAnswer;
 var theClock;
-var correctTally = 0;
-var incorrectTally = 0;
+var correctScore = 0;
+var incorrectScore = 0;
 var unansweredTally = 0;
