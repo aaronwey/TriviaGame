@@ -1,20 +1,23 @@
 $(document).ready(function() {
 
+//The initial Load Screen
 
-function initialScreen() {
-	startScreen = "<p class='text-center main-button-container'><a class='btn btn-primary btn-lg btn-block start-button' href='#' role='button'>Start Quiz</a></p>";
-	$(".mainArea").html(startScreen);
+function initialLoad() {
+	loadScreen = "<p class='text-center main-button-container'><a class='btn btn-primary btn-lg btn-block start-button' href='#' role='button'>Start Quiz</a></p>";
+	$(".mainArea").html(loadScreen);
 }
 
-initialScreen();
+initialLoad();
 
-
+//Start button generates the quiz html 
 
 $("body").on("click", ".start-button", function(event){
 	generateHTML();
 	timerWrapper();
 
 }); 
+
+//The if/else for correct or incorrect answers
 
 $("body").on("click", ".answer", function(event){
 	
@@ -29,11 +32,15 @@ $("body").on("click", ".answer", function(event){
 	}
 }); 
 
+// to reset the game at the end 
+
 $("body").on("click", ".reset-button", function(event){
 	resetGame();
 }); 
 
 });  
+
+//when time has run out
 
 function generateLossDueToTimeOut() {
 	unansweredTally++;
@@ -41,24 +48,30 @@ function generateLossDueToTimeOut() {
 	 "<p class='text-center'>You ran out of time!  The correct answer was: " + correctAnswers[questionNumber] + 
 	 "</p>" + "<img class='center-block img-wrong' src='assets/images/chicken.jpg'>";
 	$(".mainArea").html(gameHTML);
-	setTimeout(wait, 4000);  
+	setTimeout(next, 4000);  
 }
+
+//when answer is correct
 
 function generateWin() {
 	correctScore++;
 	gameHTML = "<p class='text-center timer-p'>Time Remaining: <span class='timer'>" + counter + "</span></p>" +
 	 "<p class='text-center'>Correct! The answer is: " + correctAnswers[questionNumber] + "</p>" + imageArray[questionNumber];
 	$(".mainArea").html(gameHTML);
-	setTimeout(wait, 4000);  
+	setTimeout(next, 4000);  
 }
+
+//when answer is incorrect
 
 function generateLoss() {
 	incorrectScore++;
 	gameHTML = "<p class='text-center timer-p'>Time Remaining: <span class='timer'>" + counter + "</span></p>" +
 	 "<p class='text-center'>Wrong! The correct answer is: "+ correctAnswers[questionNumber] + "</p>" + "<img class='center-block img-wrong' src='assets/images/chicken.jpg'>";
 	$(".mainArea").html(gameHTML);
-	setTimeout(wait, 4000); 
+	setTimeout(next, 4000); 
 }
+
+//quiz html
 
 function generateHTML() {
 	gameHTML = "<p class='text-center timer-p'>Time Remaining: <span class='timer'>30</span></p><p class='text-center'>" +
@@ -67,7 +80,9 @@ function generateHTML() {
 	$(".mainArea").html(gameHTML);
 }
 
-function wait() {
+//to move on to next question
+
+function next() {
 	if (questionNumber < 5) {
 	questionNumber++;
 	generateHTML();
